@@ -8,7 +8,7 @@ import RequestsReceived from './pages/requests/RequestReceived.vue';
 import NotFound from './pages/NotFound.vue';
 
 const router = createRouter({
-  history: createWebHistory,
+  history: createWebHistory(),
   routes: [
     {
       path: '/',
@@ -21,7 +21,7 @@ const router = createRouter({
     {
       path: '/coaches/:id',
       component: CoachDetail,
-      children: [{ path: '/contact', component: ContactCoach }]
+      children: [{ path: 'contact', component: ContactCoach }]
     },
     { path: '/register', component: CoachRegistration },
     { path: '/requests', component: RequestsReceived },
