@@ -113,7 +113,6 @@ export default {
       this[input].isValid = true;
     },
     validateForm() {
-      console.log('Validating');
       this.formIsValid = true;
       this.firstName.isValid = true;
       this.lastName.isValid = true;

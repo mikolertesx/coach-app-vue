@@ -29,9 +29,8 @@ export default {
     });
   },
   async loadCoaches(context) {
-    // const userId = context.rootGetters.userId;
     const server = process.env.VUE_APP_SERVER;
-    const response = await fetch(`${server}/coaches.jso`);
+    const response = await fetch(`${server}/coaches.json`);
     const responseData = await response.json();
     if (!response.ok) {
       const error = new Error(responseData.message || 'Failed to fetch');
@@ -50,6 +49,7 @@ export default {
       } = responseData[key];
 
       const coach = {
+        id: key,
         firstName,
         lastName,
         description,
