@@ -31,11 +31,11 @@ export default {
   async loadCoaches(context) {
     // const userId = context.rootGetters.userId;
     const server = process.env.VUE_APP_SERVER;
-    const response = await fetch(`${server}/coaches.json`);
+    const response = await fetch(`${server}/coaches.jso`);
     const responseData = await response.json();
     if (!response.ok) {
-      // Implement response...
-      return;
+      const error = new Error(responseData.message || 'Failed to fetch');
+      throw error;
     }
 
     const coaches = [];
