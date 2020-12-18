@@ -27,5 +27,39 @@ export default {
       ...responseData,
       id: userId
     });
+  },
+  async loadCoaches(context) {
+    // const userId = context.rootGetters.userId;
+    const server = process.env.VUE_APP_SERVER;
+    const response = await fetch(`${server}/coaches.json`);
+    const responseData = await response.json();
+    if (!response.ok) {
+      // Implement response...
+      return;
+    }
+
+    const coaches = [];
+
+    for (const key in responseData) {
+      const {
+        firstName,
+        lastName,
+        description,
+        hourlyRate,
+        areas
+      } = responseData[key];
+
+      const coach = {
+        firstName,
+        lastName,
+        description,
+        hourlyRate,
+        areas
+      };
+
+      coaches.push(coach);
+    }
+
+    context.commit('setCoaches', coaches);
   }
 };
