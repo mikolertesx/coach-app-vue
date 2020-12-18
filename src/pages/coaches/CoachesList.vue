@@ -1,36 +1,38 @@
 <template>
-  <base-dialog :show="!!error" title="An error ocurred" @close="handleError">
-    <p>{{ error }}</p>
-  </base-dialog>
-  <section>
-    <coach-filter @change-filter="setFilters"></coach-filter>
-  </section>
-  <section>
-    <base-card>
-      <div class="controls">
-        <base-button mode="outline" @click="loadCoaches(true)"
-          >Refresh</base-button
-        >
-        <base-button link to="/register" v-if="!isCoach && !isLoading"
-          >Register as Coach</base-button
-        >
-      </div>
-      <div v-if="!hasCoaches">
-        <base-spinner></base-spinner>
-      </div>
-      <ul v-else>
-        <coach-item
-          v-for="coach in filteredCoaches"
-          :key="coach.id"
-          :id="coach.id"
-          :first-name="coach.firstName"
-          :last-name="coach.lastName"
-          :rate="coach.hourlyRate"
-          :areas="coach.areas"
-        ></coach-item>
-      </ul>
-    </base-card>
-  </section>
+  <div>
+    <base-dialog :show="!!error" title="An error ocurred" @close="handleError">
+      <p>{{ error }}</p>
+    </base-dialog>
+    <section>
+      <coach-filter @change-filter="setFilters"></coach-filter>
+    </section>
+    <section>
+      <base-card>
+        <div class="controls">
+          <base-button mode="outline" @click="loadCoaches(true)"
+            >Refresh</base-button
+          >
+          <base-button link to="/register" v-if="!isCoach && !isLoading"
+            >Register as Coach</base-button
+          >
+        </div>
+        <div v-if="!hasCoaches">
+          <base-spinner></base-spinner>
+        </div>
+        <ul v-else>
+          <coach-item
+            v-for="coach in filteredCoaches"
+            :key="coach.id"
+            :id="coach.id"
+            :first-name="coach.firstName"
+            :last-name="coach.lastName"
+            :rate="coach.hourlyRate"
+            :areas="coach.areas"
+          ></coach-item>
+        </ul>
+      </base-card>
+    </section>
+  </div>
 </template>
 
 <script>
