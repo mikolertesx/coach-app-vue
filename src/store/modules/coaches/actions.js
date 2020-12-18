@@ -1,5 +1,8 @@
 export default {
-  registerCoach(context, data) {
+  async registerCoach(context, data) {
+    const userId = context.rootGetters.userId;
+    const server = process.env.VUE_APP_SERVER;
+
     const coachData = {
       id: context.rootGetters.userId,
       firstName: data.first,
@@ -9,6 +12,20 @@ export default {
       areas: data.areas
     };
 
-    context.commit('registerCoach', coachData);
+    const response = await fetch(`${server}/coaches/${userId}.json`, {
+      method: 'PUT',
+      body: JSON.stringify(coachData)
+    });
+
+    if (!response.ok) {
+      return;
+    }
+
+    const responseData = await response.json();
+
+    context.commit('registerCoach', {
+      ...responseData,
+      id: userId
+    });
   }
 };
